@@ -1,20 +1,44 @@
 '''Remplir le tableau'''
+from Coordonnées import *
+from Damier import *
 
 
-class Coordonnées:
-	def __init__(self,ligne,colonne):
-		self.ligne=ligne
-		self.colonne=colonne
 
-'''prend un type Coordonnées et renvoie la case correspondante'''
 def get_case(coordonnées, damier):
+	"""[description]
+	
+	Arguments:
+		coordonnées {Coordonnées} -- emplacement de la case à retourner
+		damier {Array} -- damier dans lequel prendre la valeur
+	
+	Returns:
+		[Integer] -- 1=dame ou 0=vide
+	"""
 	return damier[coordonnées.ligne][coordonnées.colonne] 
 
 def set_case_dame(coordonnées, damier):
+	"""[summary]
+	Met une dame dans la case du damier
+	[description]
+	
+	Arguments:
+		coordonnées {[Coordonnées]} -- emplacement de la case à retourner
+		damier {Array} -- damier dans lequel prendre la valeur
+	"""
 	damier[coordonnées.ligne][coordonnées.colonne]=1
-
-'''le damier est un tableau de lignes'''
+	
 def new_damier(taille):
+	"""[summary]
+	le damier est un tableau de lignes
+
+	[description]
+		
+	Arguments:
+		taille {Integer} -- taille du damier à générer
+	
+	Returns:
+		[Array] -- Damier(2 dimentions)
+	"""
 	tab=[]
 	for i in range(0,taille):
 		ligne=[]
@@ -23,8 +47,15 @@ def new_damier(taille):
 		tab.append(ligne)
 	return tab
 
-
 def print_board(taille, damier):
+	"""[summary]
+	Affichage du Damier
+	[description]
+	
+	Arguments:
+		taille {Integer} -- taille du damier à afficher
+		damier {Array} -- damier à afficher
+	"""
 	for i in range(0,taille):
 		ligne=""
 		for j in range(0,taille):
@@ -32,6 +63,14 @@ def print_board(taille, damier):
 		print(ligne)
 
 def remplir_damier(damier):
+	"""[summary]
+	Plcer toutes les dames dans le damier
+	Les dames ne doivent pas se menacer(règles des échecs)
+	[description]
+	
+	Arguments:
+		damier {[Array]} -- damier à compléter
+	"""
 	nb_dames_placées = 0
 	while(nb_dames_placées < len(damier)):
 		damierTmp=new_damier(len(damier))
@@ -45,26 +84,41 @@ def remplir_damier(damier):
 				dame_place=placer_dame(damierTmp,case)
 				j+=1
 
-
-
-				
-
-
 def placer_dame(damier, case):
+	"""[summary]
+	Place une dame si l'emplacement spécifier est possible
+	[description]
+	
+	Arguments:
+		damier {Array} -- Damier concerné
+		case {Coordonnée} -- Emplacement souhaité
+	
+	Returns:
+		bool -- vrai si la dame a été placée, faux sinon
+	"""
 	if(placement_autorise(damier, case)):
 		set_case_dame(case, damier)
 		return True
 	return False
 
-
 '''----------------------------IsEmpty--------------------------'''
 
-'''Vérifie si le positionnement est possible sur la case donnée'''
 def placement_autorise(damier, case):
+	"""[summary]
+	Vérifie si le positionnement est possible sur la case donnée'''
+	[description]
+	
+	Arguments:
+		damier {Array} -- Damier concerné
+		case {Coordonnées} -- Emplacement souhaité
+	
+	Returns:
+		bool -- Vrai si la dame peut être placé sur cette case
+	"""
 	if(get_case(case, damier)==1):
 		print("case occupée")
 		return False
-	if(not is_diagonnale_empty(damier, case)):
+	if(not are_diagonnales_empty(damier, case)):
 		print("diagonnale occupée")
 		return False
 	if(not is_ligne_empty(damier, case.ligne)):
@@ -75,9 +129,18 @@ def placement_autorise(damier, case):
 		return False
 	return True
 
-
-'''return true si la ligne est vide (que des 0)'''
-def is_diagonnale_empty(damier, case):
+def are_diagonnales_empty(damier, case):
+	"""[summary]
+	Vérifie si les diagonales partants du point sont vides
+	[description]
+	
+	Arguments:
+		damier {Array} -- Damier concerné
+		case {Coordonnées} -- Emplacement souhaité
+	
+	Returns:
+		bool -- Vrai si les diagonnales sont vide(que des 0)
+	"""
 	diag1= Coordonnées(case.ligne-1, case.colonne-1)
 
 	'''partie haute de la diagonale 1'''
@@ -114,17 +177,35 @@ def is_diagonnale_empty(damier, case):
 
 	return True
 
-
-'''return true si la ligne est vide (que des 0)'''
 def is_ligne_empty(damier, numLigne):
+	"""[summary]
+	Vérification d'une ligne
+	[description]
+	
+	Arguments:
+		damier {Array} -- Damier concerné
+		numLigne {Integer} -- numéro de la ligne à vérifier
+	
+	Returns:
+		bool -- Vrai si la ligne est vide
+	"""
 	for i in range(0,len(damier[numLigne])):
 		if damier[numLigne][i]==1:
 			return False
 	return True
 
-
-'''return true si la colonne est vide (que des 0)'''
 def is_colonne_empty(damier, numColonne):
+	"""[summary]
+	Vérifie si la colonne est vide
+	[description]
+	
+	Arguments:
+		damier {Array} -- Damier concerné
+		numColonne {Integer} -- numéro de la colonne à vérifier
+	
+	Returns:
+		bool -- Vrai si la colonne est vide
+	"""
 	for i in range(0,len(damier)):
 		if damier[i][numColonne]==1:
 			return False
@@ -142,7 +223,7 @@ board = [[0, 0, 0, 0],
 	    [0, 0, 0, 0]]
 
 case = Coordonnées(1,1)
-print(is_diagonnale_empty(board,case))
+print(are_diagonnales_empty(board,case))
 print(is_colonne_empty(board,1))
 print(is_ligne_empty(board,1))
 print(placement_autorise(board,case))
