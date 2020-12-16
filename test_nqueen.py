@@ -1,13 +1,13 @@
 import pytest
 import time
-from résolution import *
-
+from test import *
+from Damier import *
 
 
 
 
 def generate_board(size):
-    return [[0 for x in range(size)] for y in range(size)]
+    return Damier(size)#Modified
 
 
 class TestUtils:
