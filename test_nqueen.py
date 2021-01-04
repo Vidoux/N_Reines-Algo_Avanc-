@@ -2,12 +2,11 @@ import pytest
 import time
 from test import *
 from Damier import *
-
-
+from résolution_naive import *
 
 
 def generate_board(size):
-    return Damier(size)#Modified
+    return Damier(size)  # Modified
 
 
 class TestUtils:
@@ -16,21 +15,30 @@ class TestUtils:
                  [0, 1, 0, 0],
                  [0, 0, 0, 1],
                  [0, 0, 1, 0]]
-        return board
+        damier = Damier(len(board))
+        print(len(board))
+        damier.set_grille_spécifique(board)
+        return damier
 
     def get_board_soluce(self):
         board = [[0, 0, 1, 0],
                  [1, 0, 0, 0],
                  [0, 0, 0, 1],
                  [0, 1, 0, 0]]
-        return board
+        damier = Damier(len(board))
+        print(len(board))
+        damier.set_grille_spécifique(board)
+        return damier
 
     def get_good_board_not_full(self):
         board = [[0, 0, 0, 0],
                  [1, 0, 0, 0],
                  [0, 0, 0, 1],
                  [0, 1, 0, 0]]
-        return board
+        damier = Damier(len(board))
+        print(len(board))
+        damier.set_grille_spécifique(board)
+        return damier
 
     def test_print(self, capsys):
         board = generate_board(4)
@@ -65,8 +73,7 @@ class TestUtils:
         assert nb_queen == 0
 
     def test_is_soluce_soluce(self):
-        board = self.get_board_soluce()
-        is_a_soluce, nb_queen = is_soluce(4, board)
+        boar_soluce, nb_queen = is_soluce(4, board)
         assert is_a_soluce
         assert nb_queen == 4
 
