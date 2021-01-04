@@ -6,6 +6,9 @@ class Damier:
 		self.taille=taille
 		self.grille= self.__new_grille()
 
+	def supprimer_dame(self, coordonnées):
+		self.grille[coordonnées.ligne][coordonnées.colonne]=0
+
 	def set_case_dame(self, coordonnées):
 		self.grille[coordonnées.ligne][coordonnées.colonne]=1
 
