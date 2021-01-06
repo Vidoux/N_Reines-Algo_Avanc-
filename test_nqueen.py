@@ -1,7 +1,6 @@
-import pytest
 import time
-from test import *
-from Damier import *
+
+import pytest
 from résolution_naive import *
 
 
@@ -46,8 +45,6 @@ class TestUtils:
         print_board(4, board)
 
         captured = capsys.readouterr()
-        a=captured.out == " 0 0 0 0\n 0 0 0 0\n 0 0 0 0\n 0 0 0 0\n"
-        print(a)
         assert captured.out == " 0 0 0 0\n 0 0 0 0\n 0 0 0 0\n 0 0 0 0\n"
 
     def test_can_t_attack_empty(self):
@@ -73,7 +70,8 @@ class TestUtils:
         assert nb_queen == 0
 
     def test_is_soluce_soluce(self):
-        boar_soluce, nb_queen = is_soluce(4, board)
+        board = self.get_board_soluce()
+        is_a_soluce, nb_queen = is_soluce(4, board)
         assert is_a_soluce
         assert nb_queen == 4
 
@@ -159,6 +157,7 @@ class TestBig:
 
 
 class TestAllSoluce:
+
     @pytest.mark.parametrize("board_size, nb_soluce", [(4,2), (5,10), (6,4), (7,40), (8,92)])
     def test_solve_N_x_N(self, board_size, nb_soluce):
         board = generate_board(board_size)
@@ -169,6 +168,7 @@ class TestAllSoluce:
             is_a_soluce, nb_queen = is_soluce(board_size, soluce)
             assert is_a_soluce
             assert nb_queen == board_size
+
 
 
 

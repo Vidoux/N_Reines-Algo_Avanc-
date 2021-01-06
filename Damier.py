@@ -1,6 +1,3 @@
-from Coordonnées import *
-
-
 class Damier:
 
     def __init__(self, taille):
@@ -23,7 +20,7 @@ class Damier:
             for j in range(0, self.taille):
                 ligne += " " + str(self.grille[i][j])
             string += ligne
-            if (i < self.taille - 1):
+            if i < self.taille - 1:
                 string += "\n"
         return string
 
