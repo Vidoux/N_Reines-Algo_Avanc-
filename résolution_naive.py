@@ -1,6 +1,6 @@
 import copy
-from Damier import *
-from Coordonnées import *
+from Coordonnées import Coordonnées
+from Damier import Damier
 
 
 # --------------------Fonctions utilitaires-------------------------------
@@ -37,11 +37,12 @@ def is_soluce(taille, damier):
     """[summary]
     détermine si le damier envoyé est une solution ou non
     [description]
-    
+
     Arguments:
-        taille {Integer} -- taille du Damier(requis pour passer les tests mais non-utilisé)
+        taille {Integer} -- taille du Damier(requis pour passer les test
+        mais non-utilisé)
         damier {Damier} -- Damier à vérifier
-    
+
     Returns:
         [Boolean] -- true si le damier est une solution
     """
@@ -54,19 +55,20 @@ def is_soluce(taille, damier):
             # print(damier.get_case(case))
             if damier.get_case(case) == 1:
                 nb_dames += 1
-                is_the_soluce = is_the_soluce and placement_autorise(damier, case)
+                is_the_soluce = is_the_soluce and \
+                    placement_autorise(damier, case)
     is_the_soluce = is_the_soluce and nb_dames == taille
     return is_the_soluce, nb_dames
 
 
 def solve_n_queen_small(board_size, damier):
     """[summary]
-    Résoudre le problème des n-dames jusqu'à n=20 
+    Résoudre le problème des n-dames jusqu'à n=20
     [description]
-    
+
     Arguments:
         board_size {Integer} -- Taille du damier(requis pour les tests)
-        damier {Damier} -- Damier à traiter    
+        damier {Damier} -- Damier à traiter
     Returns:
         [Damier] -- Damier solution
         [bool] -- True si une solution a été trouvée
@@ -94,12 +96,12 @@ def placer_dames(damier, num_colonne):
     """[summary]
     Placer toutes les dames sur un damier donné
     [description]
-    
+
     Arguments:
         damier {Damier} -- Damier sur lequel placer les dames
         num_colonne {Integer} -- Numéro de la colonne où com-
         mencer le placement
-    
+
     Returns:
         bool -- true si une bonne configuration a été trouvée
     """
@@ -195,7 +197,8 @@ def are_diagonnales_empty(damier, case):
 
     # Partie basse de diag1
     diag1 = Coordonnées(case.ligne + 1, case.colonne + 1)
-    while diag1.ligne < damier.get_taille() and diag1.colonne < damier.get_taille():
+    while diag1.ligne < damier.get_taille() \
+            and diag1.colonne < damier.get_taille():
         if damier.get_case(diag1) == 1:
             return False
         diag1.ligne += 1
@@ -235,7 +238,8 @@ def is_ligne_empty(damier, case):
     """
     for i in range(0, damier.get_taille()):
         case_tmp = Coordonnées(case.ligne, i)
-        if damier.get_case(case_tmp) == 1 and not (case_tmp.colonne == case.colonne):
+        if damier.get_case(case_tmp) == 1 \
+                and not (case_tmp.colonne == case.colonne):
             return False
     return True
 
@@ -254,7 +258,8 @@ def is_colonne_empty(damier, case):
     """
     for i in range(0, damier.get_taille()):
         case_tmp = Coordonnées(i, case.colonne)
-        if damier.get_case(case_tmp) == 1 and not (case_tmp.ligne == case.ligne):
+        if damier.get_case(case_tmp) == 1 \
+                and not (case_tmp.ligne == case.ligne):
             return False
     return True
 
@@ -264,21 +269,26 @@ def is_colonne_empty(damier, case):
 '''----------------------------Trouver Toutes les solutions----------------'''
 
 
-def placer_dames_toutes_configs(damier, num_colonne, tab_stockage_solutions):
+def placer_dames_toutes_configs(damier, num_colonne,
+                                tab_stockage_solutions):
     """[summary]
-    Trouves toutes les solutions possibles au problème des n-dames pour un damier donné
+    Trouves toutes les solutions possibles au problème
+    des n-dames pour un damier donné
     [description]
-    
+
     Arguments:
         damier {Damier} -- Damier à traiter
-        num_colonne {Integer} -- Numéro de la colonne où commencer le traitement
-        tab_stockage_solutions {Array} -- Tableau de stockage de toutes les solutions
+        num_colonne {Integer} -- Numéro de la colonne
+        où commencer le traitement
+        tab_stockage_solutions {Array} -- Tableau de stockage de
+        toutes les solutions
     """
 
     # Si la colonnes est supérieur au nombre de colonnes,
     # alors toutes les dames sont placées, problème résolu!
     if num_colonne >= damier.get_taille():
-        damier_tmp = copy.deepcopy(damier)  # fait une copie complétement indépendante du damier
+        # fait une copie complétement indépendante du damier
+        damier_tmp = copy.deepcopy(damier)
         # pour la stocker dans les solutions
         tab_stockage_solutions.append(damier_tmp)
         return
@@ -290,7 +300,8 @@ def placer_dames_toutes_configs(damier, num_colonne, tab_stockage_solutions):
         # print(case.ligne)
         if placement_autorise(damier, case):
             placer_dame(damier, case)
-            placer_dames_toutes_configs(damier, num_colonne + 1, tab_stockage_solutions)
+            placer_dames_toutes_configs(damier, num_colonne + 1,
+                                        tab_stockage_solutions)
             # Le placement de la dame à cet emplacement ne permet
             # pas de placer toutes les autres dames
             # On essaie alors l'emplacement suivant
@@ -301,11 +312,11 @@ def solve_n_queen_all_soluce(taille, damier):
     """[summary]
     Trouve toutes les solutions et renvoie les solutions dans un tableau
     [description]
-    
+
     Arguments:
         taille {Integer} -- taille du damier, requis pour les tests
         damier {Damier} -- Damier à traiter
-    
+
     Returns:
         Array -- Tableau contenant toutes les solutions
     """
@@ -316,7 +327,6 @@ def solve_n_queen_all_soluce(taille, damier):
 
 
 '''--------------------------//Trouver toutes les solutions----------------'''
-
 
 '''-----------------testing functions-----------------------'''
 N = 6

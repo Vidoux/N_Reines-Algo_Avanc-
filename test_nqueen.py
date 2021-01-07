@@ -1,7 +1,9 @@
-import time
-
 import pytest
-from résolution_naive import *
+import time
+from résolution_naive import (
+    is_soluce, print_board, solve_n_queen_small,
+    solve_n_queen_all_soluce, can_t_attack, Damier
+)
 
 
 def generate_board(size):
@@ -51,7 +53,7 @@ class TestUtils:
         board = generate_board(4)
         assert can_t_attack(4, board)
 
-    def test_can_t_attack_soluce(self):
+    def test_can_t_attach_soluce(self):
         board = self.get_board_soluce()
         assert can_t_attack(4, board)
 
@@ -132,7 +134,6 @@ class TestMedium:
         assert is_a_soluce
         assert nb_queen == board_size
 
-
     @pytest.mark.parametrize("board_size", [20, 30, 50])
     def test_solve_N_x_N(self, board_size):
         board = generate_board(board_size)
@@ -157,8 +158,8 @@ class TestBig:
 
 
 class TestAllSoluce:
-
-    @pytest.mark.parametrize("board_size, nb_soluce", [(4,2), (5,10), (6,4), (7,40), (8,92)])
+    @pytest.mark.parametrize("board_size, nb_soluce",
+                             [(4, 2), (5, 10), (6, 4), (7, 40), (8, 92)])
     def test_solve_N_x_N(self, board_size, nb_soluce):
         board = generate_board(board_size)
         boards = solve_n_queen_all_soluce(board_size, board)
@@ -168,7 +169,3 @@ class TestAllSoluce:
             is_a_soluce, nb_queen = is_soluce(board_size, soluce)
             assert is_a_soluce
             assert nb_queen == board_size
-
-
-
-
