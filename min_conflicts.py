@@ -34,7 +34,6 @@ def solve_n_queen_big(taille, damier):
     return damier, True
 
 
-# Function to initialize the board with 8 queens in an ideal layout
 def initialisation_damier(taille, lignes, candidats):
     """[summary]
     Placement initial des dames
@@ -120,15 +119,14 @@ def dames_to_damier(lignes, damier_taille):
 def placer_dames(lignes, damier, candidats):
     """[summary]
     Cherche à placer toutes les dames de sorte à arriver à
-     une solution au problème
-    des n dames.
+    une solution au problème des n dames.
     [description]
 
     Arguments:
         lignes {Array} -- emplacement des dames pour chaque ligne
         damier {Damier} -- damier à modifier
         candidats {Array} -- tableau de stockage des candidats
-        possible pour chaque déplacement
+                            possible pour chaque déplacement
 
     Returns:
         {Integer} -- Nombre de mouvements effectués avant
@@ -153,6 +151,8 @@ def placer_dames(lignes, damier, candidats):
         random_queen = random.randint(0, len(lignes) - 1)
         deplacer_reine(random_queen, lignes, candidats)
         nbr_mouvements += 1
+
+    damier = dames_to_damier(lignes, damier.get_taille())
 
 
 def deplacer_reine(queen_col, lignes, candidats):
