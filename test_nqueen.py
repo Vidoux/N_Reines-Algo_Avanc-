@@ -1,5 +1,8 @@
 import pytest
 import time
+from min_conflicts import (
+    solve_n_queen_big
+)
 from résolution_naive import (
     is_soluce, print_board, solve_n_queen_small,
     solve_n_queen_all_soluce, can_t_attack, Damier
