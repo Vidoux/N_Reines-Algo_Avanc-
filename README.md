@@ -26,6 +26,6 @@ Pour développer cet algorithme nous avons utilisé différents sites internet a
 
 Pour cet algorithme nous sommes repartis du premier en l'adaptant de sorte à ne pas s'arrêter à la première solution mais en cherchant jusqu'à la dernière solution. L'adaptation majeure ici consistait au stockage de la solution une fois trouvée puis reprendre l'algorithme en continuant le backtracking, jusqu'à ce que le backtracking soit complètement fini. Ici l'algorithme est donc encore plus gourmand en performances que le premier.
 
-Notes: Ci dessous un diagramme résumant notre réflexion pour la conceptions des algorithmes 1 et 3.
+***Notes: Ci dessous un diagramme résumant notre réflexion pour la conceptions des algorithmes 1 et 3.
 ![schéma](/schema.svg)
 
